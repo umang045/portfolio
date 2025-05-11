@@ -1,0 +1,35 @@
+name: "portfolio-deploy"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      #checkout branches
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      #install node
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      #install dependency
+      - name: Install dependencies
+        run: npm install
+
+      #Build the project
+      - name: Build project
+        run: npm run build
+
+      #Deploy the project
+      - name: Deploy the project
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public

@@ -1,0 +1,9 @@
+-> first do some changes in package.json file
+ 
+-> npm i gh-pages
+
+-> create build of project npm run build
+
+-> "scripts": {
+  "deploy": "gh-pages -d dist"
+}
