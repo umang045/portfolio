@@ -9,27 +9,27 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
     steps:
-      #checkout branches
+      # Checkout branches
       - name: Checkout code
         uses: actions/checkout@v4
 
-      #install node
+      # Install Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      #install dependency
+      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      #Build the project
+      # Build the project
       - name: Build project
         run: npm run build
 
-      #Deploy the project
+      # Deploy the project
       - name: Deploy the project
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          publish_dir: ./dist  # <-- Correct path for Vite build output
